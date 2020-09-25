@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+
+<meta charset="UTF-8">
+  <title>House Price Prediction</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	    <!-- Required meta tags -->
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+<meta content="noindex, nofollow" name="robots">
+<!-- Include CSS File Here -->
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- Bootstrap CSS --> 
+</head>
+
+<body>
+
+  <h4  align="center">Check your car insurance security</h4>
+
+<form action="{{ url_for('predict')}}" method="post" style="text-align: center;">
+
+  <label for="month_as_customer" style="color: black">month_as_customer:</label>
+    <input type="text" name="month_as_customer" placeholder="month_as_customer" required="required" style="width: 25%" style="margin-left: 100px;" /><br>
+ 
+  <label for="policy_state" style="color: black">policy_state:</label>
+    <select id="policy_state" name="policy_state">
+      <option id="OH" value="OH">OH</option>
+      <option id="IN" value="IN">IN</option>
+      <option id="IL" value="IL">IL</option>
+    </select>
+  <br>
+
+  <label for="policy_csl" style="color: black">policy_csl:</label>
+    <select id="policy_csl" name="policy_csl">
+      <option id="policy_250" value="250/500">250/500</option>
+      <option id="policy_100" value="100/300">100/300</option>
+      <option id="policy_500" value="500/1000">500/1000</option>
+    </select>
+  <br>
+
+  <label for="policy_deductable" style="color: black">policy_deductable:</label>
+    <select id="policy_deductable" name="policy_deductable">
+      <option id="duct_100" value="100">100</option>
+      <option id="duct_500" value="500">500</option>
+      <option id="duct_2000" value="2000">2000</option>
+    </select>
+  <br>
+
+  <label for="policy_annual_premium" style="color: black">policy_annual_premium:</label>
+    <input type="text" name="policy_annual_premium" placeholder="policy_annual_premium" required="required" style="width: 25%" style="margin-left: 100px;" /><br>
+  <br>
+
+  <label for="umbrella_limit" style="color: black">umbrella_limit:</label>
+    <input type="text" name="umbrella_limit" placeholder="umbrella_limit" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="insured_sex" style="color: black">insured_sex:</label>
+    <select id="insured_sex" name="insured_sex">
+      <option id="Male" value="MALE">Male</option>
+      <option id="Female" value="FEMALE">Female</option>
+    </select>
+  <br>
+
+  <label for="insured_education_level" style="color: black">insured_education_level:</label>
+    <select id="insured_education_level" name="insured_education_level">
+      <option id="JD" value="JD">JD</option>
+      <option id="High_School" value="High School">High School</option>
+      <option id="Associate" value="Associate">Associate</option>
+      <option id="MD" value="MD">MD</option>
+      <option id="Masters" value="Masters">Masters</option>
+      <option id="PhD" value="PhD">PhD</option>
+      <option id="College" value="College">College</option>
+    </select>
+  <br>
+
+  <label for="insured_occupation" style="color: black">insured_occupation:</label>
+    <select id="insured_occupation" name="insured_occupation">
+      <option id="machine-op-inspct" value="machine-op-inspct">machine-op-inspct</option>
+      <option id="prof-specialty" value="prof-specialty">prof-specialty</option>
+      <option id="tech-support" value="tech-support">tech-support</option>
+      <option id="sales" value="sales">sales</option>
+      <option id="exec-managerial" value="exec-managerial">exec-managerial</option>
+      <option id="craft-repair" value="craft-repair">craft-repair</option>
+      <option id="transport-moving" value="transport-moving">transport-moving</option>
+      <option id="priv-house-serv" value="priv-house-serv">priv-house-serv</option>
+      <option id="other-service" value="other-service">other-service</option>
+      <option id="armed-forces" value="armed-forces">armed-forces</option>
+      <option id="adm-clerical" value="adm-clerical">adm-clerical</option>
+      <option id="protective-serv" value="protective-serv">protective-serv</option>
+      <option id="handlers-cleaners" value="handlers-cleaners">handlers-cleaners</option>
+      <option id="farming-fishing" value="farming-fishing">farming-fishing</option>
+    </select>
+  <br>
+
+  <label for="insured_hobbies" style="color: black">insured_hobbies:</label>
+    <select id="insured_hobbies" name="insured_hobbies">
+      <option id="reading" value="reading">reading</option>
+      <option id="exercise" value="exercise">exercise</option>
+      <option id="paintball" value="paintball">paintball</option>
+      <option id="bungie-jumping" value="bungie-jumping">bungie-jumping</option>
+      <option id="movies" value="movies">movies</option>
+      <option id="golf" value="golf">golf</option>
+      <option id="camping" value="camping">camping</option>
+    </select>
+  <br>
+
+  <label for="insured_relationship" style="color: black">insured_relationship:</label>
+    <select id="insured_relationship" name="insured_relationship">
+      <option id="own-child" value="own-child">own-child</option>
+      <option id="other-relative" value="other-relative">other-relative</option>
+      <option id="not-in-family" value="not-in-family">not-in-family</option>
+      <option id="husband" value="husband">husband</option>
+      <option id="wife" value="wife">wife</option>
+      <option id="unmarried" value="unmarried">unmarried</option>
+    </select>
+  <br>
+
+  <label for="capital-gains" style="color: black">capital-gain:</label>
+    <input type="text" name="capital-gains" placeholder="capital-gains" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="capital-loss" style="color: black">capital-loss:</label>
+    <input type="text" name="capital-loss" placeholder="capital-loss" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="incident_type" style="color: black">incident_type:</label>
+    <select id="incident_type" name="incident_type">
+      <option id="Multi-vehicle_Collision" value="Multi-vehicle Collision">Multi-vehicle Collision</option>
+      <option id="Single_Vehicle_Collision" value="Single Vehicle Collision">Single Vehicle Collision</option>
+      <option id="Vehicle_Theft " value="Vehicle Theft">Vehicle Theft</option>
+      <option id="Parked_Car" value="Parked Car">Parked Car</option>
+    </select>
+  <br>
+
+  <label for="incident_city" style="color: black">incident_city:</label>
+    <select id="incident_city" name="incident_city">
+      <option id="Springfield" value="Springfield">Springfield</option>
+      <option id="Arlington" value="Arlington">Arlington</option>
+      <option id="Columbus" value="Columbus">Columbus</option>
+      <option id="Northbend" value="Northbend">Northbend</option>
+      <option id="Hillsdale" value="Hillsdale">Hillsdale</option>
+      <option id="Riverwood" value="Riverwood">Riverwood</option>
+      <option id="Northbrook" value="Northbrook">Northbrook</option>
+    </select>
+  <br>
+
+  <label for="incident_hour_of_the_day" style="color: black">incident_hour_of_the_day:</label>
+    <input type="text" name="incident_hour_of_the_day" placeholder="incident_hour_of_the_day" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="number_of_vehicles_involved" style="color: black">number_of_vehicles_involved:</label>
+    <input type="text" name="number_of_vehicles_involved" placeholder="number_of_vehicles_involved" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="bodily_injuries" style="color: black">bodily_injuries:</label>
+    <input type="text" name="bodily_injuries" placeholder="bodily_injuries" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="witnesses" style="color: black">witnesses:</label>
+    <input type="text" name="witnesses" placeholder="witnesses" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="total_claim_amount" style="color: black">total_claim_amount:</label>
+    <input type="text" name="total_claim_amount" placeholder="total_claim_amount" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+
+  <label for="auto_make" style="color: black">auto_make:</label>
+    <select id="auto_make" name="auto_make">
+      <option id="Saab" value="Saab">Saab</option>
+      <option id="Dodge" value="Dodge">Dodge</option>
+      <option id="Suburu" value="Suburu">Suburu</option>
+      <option id="Nissan" value="Nissan">Nissan</option>
+      <option id="Chevrolet" value="Chevrolet">Chevrolet</option>
+      <option id="BMW" value="BMW">BMW</option>
+      <option id="Ford" value="Ford">Ford</option>
+      <option id="Toyota" value="Toyota">Toyota</option>
+      <option id="Audi" value="Audi">Audi</option>
+      <option id="Accura" value="Accura">Accura</option>
+      <option id="Volkswagen" value="Volkswagen">Volkswagen</option>
+      <option id="Jeep" value="Jeep">Jeep</option>
+      <option id="Mercedes" value="Mercedes">Mercedes</option>
+      <option id="Honda" value="Honda">Honda</option>
+    </select>
+  <br>
+
+  <label for="auto_year" style="color: black">auto_year:</label>
+    <input type="text" name="auto_year" placeholder="auto_year" required="required" style="width: 25%" style="margin-left: 100px;" />
+  <br>
+  
+  <button type="submit" class="btn btn-primary btn-large" >Predict</button><br>
+    	
+</form>
+
+<br>
+<br>
+ 
+  <h2 style="text-align: center;color: black">
+    {{ prediction_text }}
+  </h2>
+
+
+</body>
+</html>
